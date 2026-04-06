@@ -90,7 +90,7 @@ a { color: inherit; }
 .hero-content h1 {
   margin: 24px 0 12px;
   max-width: 780px;
-  font-size: clamp(2.9rem, 6vw, 5.4rem);
+  font-size: clamp(2.4rem, 5vw, 5.2rem);
   line-height: .98;
   letter-spacing: -0.05em;
   font-weight: 800;
