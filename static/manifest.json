@@ -1,0 +1,9 @@
+{
+  "name": "Strategic Dashboard Uttarakhand",
+  "short_name": "StrategicDash",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#09090c",
+  "theme_color": "#09090c",
+  "icons": []
+}

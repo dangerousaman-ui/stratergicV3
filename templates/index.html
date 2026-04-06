@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#09090c" />
+    <title>Strategic Dashboard | Uttarakhand</title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <section class="hero-section" id="top">
+        <div class="hero-bg">
+          <div class="beam beam-1"></div>
+          <div class="beam beam-2"></div>
+          <div class="beam beam-3"></div>
+          <div class="beam beam-4"></div>
+          <div class="beam beam-5"></div>
+          <div class="beam-glow"></div>
+          <div class="ambient-grid"></div>
+        </div>
+
+        <div class="hero-content container">
+          <div class="eyebrow">Executive Intelligence Interface</div>
+          <h1>
+            Strategic Dashboard for
+            <span>LT. GEN. GURMIT SINGH AVSM, PVSM, UYSM, VSM</span>
+          </h1>
+          <p class="hero-subtitle">Governor of Uttarakhand</p>
+          <p class="hero-copy">
+            A premium, Spline-inspired public-information dashboard for leadership monitoring,
+            local news intelligence, law and policy watch, weather signals, PMO updates,
+            and Uttarakhand satellite visibility.
+          </p>
+          <div class="hero-actions">
+            <a href="#dashboard" class="button button-primary">Open Dashboard</a>
+            <a href="#deploy" class="button button-secondary">Publish on Render</a>
+          </div>
+        </div>
+      </section>
+
+      <main class="container" id="dashboard">
+        <section class="intro-grid">
+          <article class="glass-card spotlight-card">
+            <div class="card-label">Leadership Panel</div>
+            <h2>Public office snapshots</h2>
+            <p>Official references for the Governor, Chief Minister, Prime Minister, and PMO public updates.</p>
+            <div class="people-grid four-col">
+              {% for key, person in people.items() %}
+              <div class="mini-card">
+                <div class="mini-role">{{ person.role }}</div>
+                <h3>{{ person.name }}</h3>
+                <p>{{ person.summary }}</p>
+                <a href="{{ person.source }}" target="_blank" rel="noopener">Open official source</a>
+              </div>
+              {% endfor %}
+            </div>
+          </article>
+
+          <article class="glass-card stats-card">
+            <div class="card-label">Live Services</div>
+            <div class="stat-row"><span>Uttarakhand News</span><strong>Google News RSS</strong></div>
+            <div class="stat-row"><span>Law &amp; Policy Watch</span><strong>Public search feed</strong></div>
+            <div class="stat-row"><span>Chief Minister feed</span><strong>Public search feed</strong></div>
+            <div class="stat-row"><span>PM / PMO feed</span><strong>Public search feed</strong></div>
+            <div class="stat-row"><span>Weather</span><strong>Open-Meteo</strong></div>
+            <div class="stat-row"><span>Satellite</span><strong>NASA GIBS</strong></div>
+            <div class="stat-row"><span>Finance</span><strong>Frankfurter / CoinGecko</strong></div>
+          </article>
+        </section>
+
+        <section class="dashboard-grid">
+          <article class="glass-card data-card">
+            <div class="card-header">
+              <div>
+                <div class="card-label">Local Lens</div>
+                <h2>Uttarakhand local news</h2>
+              </div>
+              <button class="icon-button" data-topic="uttarakhand">Refresh</button>
+            </div>
+            <div id="news-uttarakhand" class="feed-list"></div>
+          </article>
+
+          <article class="glass-card data-card">
+            <div class="card-header">
+              <div>
+                <div class="card-label">Policy Watch</div>
+                <h2>Uttarakhand laws &amp; government updates</h2>
+              </div>
+              <button class="icon-button" data-topic="laws">Refresh</button>
+            </div>
+            <div id="news-laws" class="feed-list"></div>
+          </article>
+
+          <article class="glass-card data-card">
+            <div class="card-header">
+              <div>
+                <div class="card-label">State Executive</div>
+                <h2>Chief Minister watch</h2>
+              </div>
+              <button class="icon-button" data-topic="cm">Refresh</button>
+            </div>
+            <div id="news-cm" class="feed-list"></div>
+          </article>
+
+          <article class="glass-card data-card">
+            <div class="card-header">
+              <div>
+                <div class="card-label">National Executive</div>
+                <h2>Prime Minister / PMO updates</h2>
+              </div>
+              <button class="icon-button" data-topic="pm">Refresh</button>
+            </div>
+            <div id="news-pm" class="feed-list"></div>
+          </article>
+
+          <article class="glass-card data-card compact-card">
+            <div class="card-header">
+              <div>
+                <div class="card-label">Atmosphere</div>
+                <h2>Dehradun weather</h2>
+              </div>
+            </div>
+            <div id="weather-content" class="stack"></div>
+          </article>
+
+          <article class="glass-card data-card compact-card">
+            <div class="card-header">
+              <div>
+                <div class="card-label">Market Snapshot</div>
+                <h2>Finance</h2>
+              </div>
+            </div>
+            <div id="finance-content" class="stack"></div>
+          </article>
+
+          <article class="glass-card satellite-card">
+            <div class="card-header">
+              <div>
+                <div class="card-label">Orbital View</div>
+                <h2>NASA satellite image for Uttarakhand</h2>
+              </div>
+              <button class="icon-button" id="reload-satellite">Refresh</button>
+            </div>
+            <div class="satellite-frame">
+              <img id="satellite-image" alt="NASA satellite image" />
+            </div>
+            <p class="muted">Image source is NASA GIBS, centered on Uttarakhand coordinates.</p>
+          </article>
+        </section>
+
+        <section class="glass-card deployment-card" id="deploy">
+          <div class="card-label">Deployment</div>
+          <h2>Make it work and publish on Render</h2>
+          <div class="steps-grid">
+            <div class="step">
+              <span>1</span>
+              <h3>Install locally</h3>
+              <p>Create a virtual environment, install dependencies, then run <code>python app.py</code>.</p>
+            </div>
+            <div class="step">
+              <span>2</span>
+              <h3>Push to GitHub</h3>
+              <p>Commit the project and push it to a new GitHub repository.</p>
+            </div>
+            <div class="step">
+              <span>3</span>
+              <h3>Deploy on Render</h3>
+              <p>Create a new Web Service and use <code>gunicorn app:app</code> as the start command.</p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>
